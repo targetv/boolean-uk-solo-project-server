@@ -11,6 +11,6 @@ const router = express.Router();
 router.post("/", createChannel);
 router.delete("/", deleteChannel);
 router.patch("/", updateChannel);
-router.get("/", getAllChannels);
+router.get("/:id", getAllChannels);
 
 module.exports = router;

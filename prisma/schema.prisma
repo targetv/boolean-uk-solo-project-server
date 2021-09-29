@@ -17,7 +17,7 @@ model User {
   email         String           @unique
   username      String           @unique
   password      String           @unique
-  userimage     String
+  userimage     String?
   memberServers UsersOnServers[] @relation("MemberServers")
   post          Post[]
 

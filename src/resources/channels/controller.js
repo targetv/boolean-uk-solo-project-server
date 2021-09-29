@@ -56,13 +56,13 @@ const updateChannel = async (req, res) => {
 };
 
 const getAllChannels = async (req, res) => {
-  const getAllChannels = {
-    ...req.body,
-  };
+  let serverId = req.params.id;
+  serverId = parseInt(serverId);
+
   try {
     const getChannels = await prisma.channel.findMany({
       where: {
-        serverId: getAllChannels.serverId,
+        serverId: serverId,
       },
     });
     res.json({ getChannels });

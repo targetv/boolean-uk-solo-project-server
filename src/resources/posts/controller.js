@@ -17,14 +17,16 @@ const createPost = async (req, res) => {
 };
 
 const getPost = async (req, res) => {
-  const postBody = {
-    ...req.body,
-  };
+  let channelId = req.params.id;
+  channelId = parseInt(channelId);
 
   try {
     const getPost = await prisma.post.findMany({
       where: {
-        channelId: postBody.channelId,
+        channelId: channelId,
+      },
+      include: {
+        user: true,
       },
     });
     res.json({ getPost });

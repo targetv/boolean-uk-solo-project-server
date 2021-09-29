@@ -8,7 +8,7 @@ const {
 } = require("./controller");
 const router = express.Router();
 
-router.get("/", getServers);
+router.get("/:id", getServers);
 router.post("/", createServer);
 router.delete("/", deleteServer);
 router.patch("/", updateServer);

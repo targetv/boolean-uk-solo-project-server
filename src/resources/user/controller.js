@@ -1,14 +1,31 @@
 const prisma = require("../../utils/database");
 
-const Users = async (req, res) => {
+const User = async (req, res) => {
+  let userId = req.params.id;
+
+  userId = parseInt(userId);
+
   try {
-    const getUsers = await prisma.user.findMany({
+    const getUser = await prisma.user.findMany({
+      where: {
+        id: userId,
+      },
       include: {
         ownedServers: true,
-        memberServers: true,
+        memberServers: {
+          include: {
+            server: {
+              select: {
+                servername: true,
+                serverimage: true,
+                id: true,
+              },
+            },
+          },
+        },
       },
     });
-    res.json({ getUsers });
+    res.json({ getUser });
   } catch (error) {
     console.log("[Error]", error);
     res.status(500).json({ error });
@@ -79,7 +96,7 @@ const updateUser = async (req, res) => {
 };
 
 module.exports = {
-  Users,
+  User,
   createUser,
   deleteUser,
   updateUser,

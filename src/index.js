@@ -8,6 +8,7 @@ const serverRouter = require("./resources/server/router");
 const channelRouter = require("./resources/channels/router");
 const postRouter = require("./resources/posts/router");
 const friendsRequestRouter = require("./resources/friendRequests/router");
+const auth = require("./resources/auth/router");
 
 const app = express();
 
@@ -22,7 +23,8 @@ app.use(morgan("dev"));
 
 /* SETUP ROUTES */
 
-app.use("/users", userRouter);
+app.use("/", auth);
+app.use("/user", userRouter);
 app.use("/server", serverRouter);
 app.use("/channel", channelRouter);
 app.use("/post", postRouter);

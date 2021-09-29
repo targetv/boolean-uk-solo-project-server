@@ -7,7 +7,7 @@ const {
 const router = express.Router();
 
 router.post("/", sendFriendsRequests);
-router.get("/", getFriendsRequests);
+router.get("/:recieverId", getFriendsRequests);
 router.delete("/", deleteFriendRequest);
 
 module.exports = router;

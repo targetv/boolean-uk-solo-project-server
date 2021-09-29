@@ -16,13 +16,13 @@ const createServer = async (req, res) => {
 };
 
 const getServers = async (req, res) => {
-  const getSeverById = {
-    ...req.body,
-  };
+  let userId = req.params.id;
+  userId = parseInt(userId);
+
   try {
     const getServers = await prisma.server.findMany({
       where: {
-        ownerId: 2,
+        ownerId: userId,
       },
       include: {
         channel: true,

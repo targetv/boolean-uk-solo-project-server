@@ -16,13 +16,13 @@ const sendFriendsRequests = async (req, res) => {
 };
 
 const getFriendsRequests = async (req, res) => {
-  const requestBody = {
-    ...req.body,
-  };
+  let recieverId = req.params.recieverId;
+  recieverId = parseInt(recieverId);
+
   try {
     const getFriends = await prisma.friendRequest.findMany({
       where: {
-        recieverId: requestBody.recieverId,
+        recieverId: recieverId,
       },
       include: {
         sender: {
@@ -33,7 +33,7 @@ const getFriendsRequests = async (req, res) => {
         },
       },
     });
-    res.json({ getFriends });
+    res.json(getFriends);
   } catch (error) {
     console.log("Error", error);
     res.status(500).json(error);
